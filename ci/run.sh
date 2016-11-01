@@ -4,9 +4,10 @@ test_mode() {
     cargo build --target $TARGET
     cargo run --target $TARGET -- -V
 
-    if [ $TRAVIS_RUST_VERSION = nightly ]; then
-        cargo test --target $TARGET
-    fi
+    export RUST_BACKTRACE=1
+    # if [ $TRAVIS_RUST_VERSION = nightly ]; then
+        cargo test --target $TARGET simple -j1 -- --nocapture
+    # fi
 }
 
 deploy_mode() {
